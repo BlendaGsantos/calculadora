@@ -5,7 +5,7 @@ def calcular(x, y, operacao):
         '3': lambda x, y: x * y,
         '4': lambda x, y: x / y if y != 0 else "Erro! Divisão por zero."
     }
-    return operacoes.get(operacao, lambda x, y: "Operação inválida!")(x, y)
+    return operacoes.get(str(operacao), lambda x, y: "Operação inválida!")(x, y)
 
 def calculadora():
     print("Selecione uma operação:")
@@ -14,15 +14,19 @@ def calculadora():
     print("3. Multiplicação")
     print("4. Divisão")
 
-    escolha = input("Digite o número da operação (1/2/3/4): ")
-    
     try:
-        num1 = float(input("Digite o primeiro número: "))
-        num2 = float(input("Digite o segundo número: "))
-        resultado = calcular(num1, num2, escolha)
-        print(f"Resultado: {resultado}")
+        escolha = int(input("Digite o número da operação (1/2/3/4): "))
+        
+        if 1 <= escolha <= 4:
+            num1 = float(input("Digite o primeiro número: "))
+            num2 = float(input("Digite o segundo número: "))
+            resultado = calcular(num1, num2, escolha)
+            print(f"Resultado: {resultado}")
+        else:
+            print("Erro: Você deve digitar um número entre 1 e 4.")
+    
     except ValueError:
-        print("Erro: Você deve digitar números válidos.")
+        print("Erro: Entrada inválida. Digite um número inteiro para a operação.")
 
 if __name__ == "__main__":
-    calculadora() 
+    calculadora()
